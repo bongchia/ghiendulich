@@ -142,13 +142,13 @@ if (isset($_COOKIE['roles'])) {
         <i class="js-modal-close modal-close fas fa-times"></i>
       </div>
 
-      <form enctype="multipart/form-data" id="myform">
+      <form enctype="multipart/form-data" id="myform" action="login.php" method="post">
 
-        <div class="modal-header">Đăng nhập với vai trò bạn là ADMIN</div>
+        <div class="modal-header">Đăng nhập</div>
 
         <div class="modal-body">
           <label for="contact-quantity" class="modal-label"> Tên Đăng Nhập: </label>
-          <input id="contact-quantity" name="Name" type="text" class="modal-input" placeholder="Nhập tên đăng nhập của bạn ..." required />
+          <input id="contact-quantity" name="email" type="email" class="modal-input" placeholder="Nhập tên đăng nhập của bạn ..." required />
 
           <label for="contact-phone" class="modal-label">
             Mật khẩu:

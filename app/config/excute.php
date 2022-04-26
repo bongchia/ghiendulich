@@ -166,7 +166,7 @@ function findPostsByName($name)
 {
     require '../config/connect.php';
     $data = array();
-    $sql = "SELECT * FROM posts po WHERE po.id_place = (SELECT id FROM place WHERE name like '%$name%')";
+    $sql = "SELECT * FROM posts WHERE id_place = (SELECT id FROM place WHERE `name` like '%$name%')";
     $result = $conn->query($sql);
     while ($row = $result->fetch_assoc())
         $data[] = $row;

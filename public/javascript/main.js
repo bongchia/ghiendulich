@@ -23,3 +23,24 @@ function handleDelete() {
     });
   });
 }
+function handleHeight() {
+  const scrollTop = document.querySelector(".croll-top");
+
+  window.addEventListener("scroll", function () {
+    var height = window.scrollY;
+    console.log(height);
+    if (height > 800) {
+      scrollTop.style.opacity = 1;
+    } else {
+      scrollTop.style.opacity = 0;
+    }
+  });
+  scrollTop.addEventListener("click", function () {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+}
+handleDelete();
+handleHeight();

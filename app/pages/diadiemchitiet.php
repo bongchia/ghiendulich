@@ -18,7 +18,8 @@ if (isset($_POST['content'])) {
     $content = $_POST['content'];
     $idUser = getIdUsser($_COOKIE['email'])['id'];
     createComment($idUser, $id, $content);
-
+    setcookie("alert", "Đăng bình luận thành công!", time() + 1, "/");
+    setcookie("status", "success", time() + 1, "/");
     header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
 if (isset($_POST['name'])) {
@@ -42,7 +43,7 @@ if (isset($_POST['name'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
     </script>
     <script src="./js/query.js"></script>
-    <title>GhienDuLich - KinhNghiemDuLich - <?php echo $name_dd; ?></title>
+    <title>GhienDuLich - KinhNghiemDuLich</title>
     <link href="image/logo.png" rel="icon">
 </head>
 
@@ -86,15 +87,15 @@ if (isset($_POST['name'])) {
         </div>
         <div class="bg-image"></div>
         <div class="header-text">
-            <h1>Kinh nghiệm du lịch <?php echo $name_dd; ?> tự túc từ A-Z</h1>
+            <h1>Kinh nghiệm du lịch <?php echo $name_dd ?: $name; ?> tự túc từ A-Z</h1>
             <span style="text-shadow: 10px; color:whitesmoke;">
-                <?php echo $name_dd; ?> có gì mà khiến bao người một lần đặt chân đến đây đều say đắm, mê mẩn? Cùng tìm hiểu “tất tần tật” những kinh nghiệm du lịch <?php echo $name_dd; ?> tự túc qua cẩm nang chi tiết dưới đây để tìm cho mình lời giải đáp nhé!</span>
+                <?php echo $name_dd ?: $name; ?> có gì mà khiến bao người một lần đặt chân đến đây đều say đắm, mê mẩn? Cùng tìm hiểu “tất tần tật” những kinh nghiệm du lịch <?php echo $name_dd ?: $name; ?> tự túc qua cẩm nang chi tiết dưới đây để tìm cho mình lời giải đáp nhé!</span>
     </header>
     <!-- -------------------introduce-------------------- -->
     <div class="container">
         <section class="introduce">
             <div class="introduce-content">
-                <h1>Những địa điểm du lịch <?php echo $name_dd; ?></h1>
+                <h1>Những địa điểm du lịch <?php echo $name_dd ?: $name; ?></h1>
 
                 <div>
                     <?php if (!empty($data)) {
@@ -201,7 +202,19 @@ if (isset($_POST['name'])) {
         <div class="loader-section section-right"></div>
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./js/script.js"></script>
+    <script>
+        <?php
+        if (isset($_COOKIE['alert'])) {
+        ?>
+            new swal({
+                icon: '<?php echo $_COOKIE['status'] ?>',
+                title: '<?php echo $_COOKIE['status'] == "success" ? "Chúc mừng" : "Xin lỗi" ?>',
+                text: '<?php echo $_COOKIE['alert'] ?>!'
+            })
+        <?php
+        } ?>
+    </script>
+    <script type="text/javascript" src="../../public/javascript/main.js"></script>
     <?php if ($roles == 1) { ?>
         <script>
             const btnPostComment = $('.btn-create');
@@ -220,27 +233,7 @@ if (isset($_POST['name'])) {
         </script>
     <?php } ?>
 
-    <script>
-        function handleHeight() {
-            const scrollTop = document.querySelector(".croll-top");
 
-            window.addEventListener("scroll", function() {
-                var height = window.scrollY;
-                if (height > 800) {
-                    scrollTop.style.opacity = 1;
-                } else {
-                    scrollTop.style.opacity = 0;
-                }
-            });
-            scrollTop.addEventListener("click", function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth",
-                });
-            });
-        }
-        handleHeight();
-    </script>
 
 </body>
 

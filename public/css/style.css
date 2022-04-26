@@ -56,3 +56,19 @@ a:hover {
 .convert-size {
   font-size: 20px;
 }
+.croll-top {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.4s linear;
+}
+.croll-top i {
+  font-size: 48px;
+  color: #e74c3c;
+  cursor: pointer;
+}

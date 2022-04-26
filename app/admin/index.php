@@ -4,25 +4,19 @@ require('../config/auth.php');
 require('../../bootstrap.php');
 require('../config/connect.php');
 require('../config/excute.php');
-
+$_SERVER['admin'] = 'http://localhost/review-travel/app/admin/index.php';
 if (!empty($_GET['id'])) {
     if (deletePostById($_GET['id'])) {
         setcookie("alert", "Xóa bài viết thành công", time() + 1, "/");
         setcookie("status", "success", time() + 1, "/");
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-    } else {
-        var_dump("Delete Failed");
-        die;
+        header('Location: ' . $_SERVER['admin']);
     }
 }
 if (!empty($_GET['idComment'])) {
     if (deleteCommentById($_GET['idComment'])) {
         setcookie("alert", "Xóa bình luận thành công", time() + 1, "/");
         setcookie("status", "success", time() + 1, "/");
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-    } else {
-        var_dump("Delete Failed");
-        die;
+        header('Location: ' . $_SERVER['admin']);
     }
 }
 
@@ -38,6 +32,7 @@ $dataPost = getAllPost();
     <title>Admin</title>
     <link rel="stylesheet" href="../../public/font/fontawesome-free-6.1.1-web/css/all.min.css">
     <link rel="stylesheet" href="../../public/css/style.css">
+
 </head>
 <style>
 
@@ -55,7 +50,6 @@ $dataPost = getAllPost();
                         </a>
                         <div class="dropdown-menu " aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="../admin/createPost.php">Thêm bài viết mới</a>
-                            <a class="dropdown-item" href="#">Another action</a>
                             <div class="dropdown-divider"></div>
                             <?php
                             if (!isset($_COOKIE['email']));
@@ -140,24 +134,24 @@ $dataPost = getAllPost();
                 </div>
             </div>
         </div>
+
     </div>
 
-    <script src="../../public/javascript/main.js"></script>
-    <script>
-        $(document).ready(function() {
-            handleDelete();
-            <?php
-            if (isset($_COOKIE['alert'])) {
-            ?>
-                swal({
-                    icon: '<?php echo $_COOKIE['status'] ?>',
-                    title: '<?php echo $_COOKIE['status'] == "success" ? "Chúc mừng" : "Xin lỗi" ?>'
-                    text: '<?php echo $_COOKIE['alert'] ?>!'
-                })
-            <?php
-            } ?>
-        });
-    </script>
+
 </body>
+<script src="../../public/javascript/main.js"></script>
+<script>
+    <?php
+    if (isset($_COOKIE['alert'])) {
+    ?>
+        new swal({
+            icon: '<?php echo $_COOKIE['status'] ?>',
+            title: '<?php echo $_COOKIE['status'] == "success" ? "Chúc mừng" : "Xin lỗi" ?>',
+            text: '<?php echo $_COOKIE['alert'] ?>!'
+        })
+    <?php
+    } ?>
+</script>
+
 
 </html>
