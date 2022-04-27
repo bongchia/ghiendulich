@@ -85,6 +85,7 @@ $dataPost = getAllPost();
                                         <td><?php echo getPlaceById($value['id_place'])['name'] ?></td>
                                         <td colspan="2"><a class="btn btn-warning" href="edit.php?id=<?php echo $value['id'] ?>">Sửa</a>
                                             <a class="btn btn-danger btn-delete" href="?id=<?php echo $value['id'] ?>">Xóa</a>
+                                            <a class="btn  btn-info" href="../pages/diadiemchitiet.php?id= <?php echo getPlaceById($value['id_place'])['id'] ?>">Xem</a>
                                         </td>
                                     </tr>
                                 <?php }
