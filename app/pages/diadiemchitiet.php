@@ -16,7 +16,7 @@ if (isset($_COOKIE['roles'])) {
 }
 if (isset($_POST['content'])) {
     $content = $_POST['content'];
-    $idUser = getIdUsser($_COOKIE['email'])['id'];
+    $idUser = getIdUser($_COOKIE['email'])['id'];
     createComment($idUser, $id, $content);
     setcookie("alert", "Đăng bình luận thành công!", time() + 1, "/");
     setcookie("status", "success", time() + 1, "/");

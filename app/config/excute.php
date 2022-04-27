@@ -1,5 +1,5 @@
 <?php
-// Tạo tài khoản
+// Thêm user mới
 function createUser($email, $password)
 {
     require '../config/connect.php';
@@ -20,7 +20,7 @@ function getAllUser()
     mysqli_close($conn);
     return $data;
 }
-// Lấy một user
+// Lấy một user với tham số id
 function getUserById($id)
 {
     require '../config/connect.php';
@@ -33,7 +33,7 @@ function getUserById($id)
 
     return $data;
 }
-// Xử lí đăng nhập 0 admin 1 user
+// Tìm user xử lí đăng nhập 0 admin 1 user
 function findUser($email, $password)
 {
     require '../config/connect.php';
@@ -45,7 +45,7 @@ function findUser($email, $password)
 
     return $data;
 }
-// Get user email
+// Lấy user với tham số là email xử lí đăng kí (Tìm email này đã có ai đăng kí chưa)
 function getUserByEmail($email)
 {
     require '../config/connect.php';
@@ -57,8 +57,8 @@ function getUserByEmail($email)
 
     return $data;
 }
-// lấy id user với DK email
-function getIdUsser($email)
+// lấy id của user với tham số là email xử lí comments xem id nào đang đăng nhập và comment
+function getIdUser($email)
 {
     require '../config/connect.php';
     $data;
@@ -80,7 +80,7 @@ function createPost($title, $description, $id_place)
     mysqli_close($conn);
 }
 //Xử lí lấy danh sách bài viết
-function getAllPost($message = "Data is empty")
+function getAllPost()
 {
     require '../config/connect.php';
     $data = array();
@@ -89,9 +89,6 @@ function getAllPost($message = "Data is empty")
     while ($row = $result->fetch_assoc())
         $data[] = $row;
     mysqli_close($conn);
-    if ($data == null || count($data) < 0) {
-        return $message;
-    }
     return $data;
 }
 //Xử lí lấy 1 bài viết với id
